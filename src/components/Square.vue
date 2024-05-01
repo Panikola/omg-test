@@ -11,18 +11,18 @@
 
 <script lang="ts" setup>
 import { onMounted, onUnmounted, ref, watch } from 'vue'
-import { storeService } from '../store'
+import useStore from '../composables/useStore'
 import { getRandomNumber } from '../utils'
 
 const props = defineProps<{
   squareId: string
 }>()
-
+const { squareNumber, addObserver, removeObserver } = useStore()
 const number = ref(getRandomNumber(1, 1000))
 const flash = ref(false)
 const squareRef = ref<null | HTMLElement>(null)
 
-watch(() => storeService.squareNumber(props.squareId), (newNumber) => {
+watch(() => squareNumber(props.squareId), (newNumber) => {
   number.value = newNumber
   flash.value = true
   setTimeout(() => flash.value = false, 300)
@@ -30,12 +30,12 @@ watch(() => storeService.squareNumber(props.squareId), (newNumber) => {
 
 onMounted(() => {
   if (squareRef.value) {
-    storeService.addObserver(squareRef.value)
+    addObserver(squareRef.value)
   }
 })
 onUnmounted(() => {
   if (squareRef.value) {
-    storeService.removeObserver(squareRef.value)
+    removeObserver(squareRef.value)
   }
 })
 </script>

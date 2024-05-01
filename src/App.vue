@@ -6,14 +6,15 @@
 <script lang="ts" setup>
 import { onMounted, onUnmounted } from 'vue'
 import VerticalList from './components/VerticalList.vue'
-import { storeService } from "./store";
+import useStore from "./composables/useStore";
 
+const { initAnimation, cancelAnimation } = useStore()
 onMounted(() => {
-  storeService.initAnimation()
+  initAnimation()
 })
 
 onUnmounted(() => {
-  storeService.cancelAnimation()
+  cancelAnimation()
 })
 </script>
 
