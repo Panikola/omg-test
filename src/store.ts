@@ -49,19 +49,20 @@ export function cancelAnimation() {
     }
 }
 
-// export function addObserver(el: Element) {
-//     observer.observe(el)
-// }
-// export function removeObserver(el: Element) {
-//     observer.unobserve(el)
-// }
-// const observer = new IntersectionObserver((entries) => {
-//     entries.forEach(entry => {
-//         const squareId = entry.target.getAttribute('data-observed-id')
-//         if (entry.isIntersecting) {
-//             store.visibleSquares.push(squareId || '')
-//         } else {
-//             store.visibleSquares = store.visibleSquares.filter(id => id !== squareId)
-//         }
-//     })
-// })
+export function addObserver(el: Element) {
+    observer.observe(el)
+}
+export function removeObserver(el: Element) {
+    observer.unobserve(el)
+}
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        const squareId = entry.target.id
+        if (entry.isIntersecting) {
+            store.visibleSquares.push(squareId || '')
+        } else {
+            store.visibleSquares = store.visibleSquares.filter(id => id !== squareId)
+        }
+    })
+})

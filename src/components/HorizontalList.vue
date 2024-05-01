@@ -1,7 +1,7 @@
 <template>
   <ul class="horizontal-list">
     <li v-for="i in props.cols" :key="i" >
-      <Square :row-id="props.rowId" :square-id="i"/>
+      <Square :row-id="props.rowId" :square-id="`${props.rowId}_${i}`"/>
     </li>
   </ul>
 </template>

@@ -3,6 +3,7 @@
       class="square"
       :class="{ flash: flash }"
       ref="squareRef"
+      :id="props.squareId"
   >
     {{ number }}
   </div>
@@ -10,41 +11,31 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, watch } from 'vue'
-import { store } from '../store'
-import { createVisibilityObserver, getRandomNumber } from '../utils'
+import {addObserver, removeObserver, store} from '../store'
+import { getRandomNumber } from '../utils'
 
 const props = defineProps<{
-  rowId: number,
-  squareId: number
+  squareId: string
 }>()
 
-const id = `${props.rowId}_${props.squareId}`
 const number = ref(getRandomNumber(1, 1000))
 const flash = ref(false)
 const squareRef = ref<null | HTMLElement>(null)
 
-watch(() => store.randomNumberForSquare[id], (newNumber) => {
+watch(() => store.randomNumberForSquare[props.squareId], (newNumber) => {
   number.value = newNumber
   flash.value = true
   setTimeout(() => flash.value = false, 300)
 })
 
-const { observe, unobserve } = createVisibilityObserver(isVisible => {
-  if (isVisible) {
-    store.visibleSquares.push(id)
-  } else {
-    store.visibleSquares = store.visibleSquares.filter(squareId => squareId !== id)
-  }
-})
-
 onMounted(() => {
   if (squareRef.value) {
-    observe(squareRef.value)
+    addObserver(squareRef.value)
   }
 })
 onUnmounted(() => {
   if (squareRef.value) {
-    unobserve(squareRef.value)
+    removeObserver(squareRef.value)
   }
 })
 </script>
