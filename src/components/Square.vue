@@ -44,7 +44,7 @@ onUnmounted(() => {
 .square {
   width: 50px;
   height: 50px;
-  border: 1px solid black;
+  border: 1px solid var(--color-light);
   border-radius: 10px;
   display: flex;
   align-items: center;
@@ -54,7 +54,11 @@ onUnmounted(() => {
 .square:hover {
   transform: scale(0.8);
 }
-
+@media (prefers-color-scheme: light) {
+  .square {
+    border-color: var(--color-dark);
+  }
+}
 @keyframes flash {
   0% { background-color: transparent; }
   50% { background-color: rgba(255, 255, 0, 0.5); }

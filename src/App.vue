@@ -1,4 +1,5 @@
 <template>
+  <a class="repo-link" href="https://github.com/Panikola/omg-test">Github Repo: https://github.com/Panikola/omg-test</a>
   <VerticalList />
 </template>
 
@@ -17,4 +18,17 @@ onUnmounted(() => {
 })
 </script>
 
-<style scoped></style>
+<style scoped>
+.repo-link {
+  color: var(--color-light);
+  font-size: 1.2em;
+  text-align: center;
+  font-weight: bold;
+}
+
+@media (prefers-color-scheme: light) {
+  .repo-link {
+    color: var(--color-dark);
+  }
+}
+</style>
