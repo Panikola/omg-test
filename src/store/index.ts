@@ -1,7 +1,7 @@
 import { reactive } from 'vue'
-import {SquareObserver} from "../services/SquareObserver.ts";
-import {SquareUpdater} from "../services/SquareUpdater.ts";
-import {getRandomNumber, getRowId} from "../utils";
+import { SquareObserver } from "../services/SquareObserver.ts";
+import { SquareUpdater } from "../services/SquareUpdater.ts";
+import { getRandomNumber, getRowId } from "../utils";
 
 export const store = reactive({
     visibleSquares: <string[]>[],
@@ -12,7 +12,7 @@ export const store = reactive({
 const squareObserver = new SquareObserver(updateVisibleSquaresList)
 const squareUpdater = new SquareUpdater(updateRandomSquareInRows)
 
-function updateVisibleSquaresList (entries: IntersectionObserverEntry[]) {
+function updateVisibleSquaresList(entries: IntersectionObserverEntry[]) {
     entries.forEach(entry => {
         const squareId = entry.target.id
         if (entry.isIntersecting) {
@@ -22,10 +22,12 @@ function updateVisibleSquaresList (entries: IntersectionObserverEntry[]) {
         }
     })
 }
-function updateRandomSquareInRows () {
+
+function updateRandomSquareInRows() {
     const groupedSquares = groupVisibleSquaresByRow()
     updateRandomVisibleSquareInEachRow(groupedSquares)
 }
+
 function groupVisibleSquaresByRow() {
     const groupedSquares = {} as Record<string, string[]>
     store.visibleSquares.forEach((squareId: string) => {
@@ -37,6 +39,7 @@ function groupVisibleSquaresByRow() {
     })
     return groupedSquares
 }
+
 function updateRandomVisibleSquareInEachRow(groupedSquares: Record<string, string[]>) {
     Object.keys(groupedSquares).forEach(rowId => {
         const visibleSquaresInRow = groupedSquares[rowId]
@@ -50,6 +53,7 @@ function updateRandomVisibleSquareInEachRow(groupedSquares: Record<string, strin
 export function initAnimation() {
     squareUpdater.initAnimation()
 }
+
 export function cancelAnimation() {
     squareUpdater.cancelAnimation()
 }
@@ -57,6 +61,7 @@ export function cancelAnimation() {
 export function addObserver(squareEl: Element) {
     squareObserver.addObserver(squareEl)
 }
+
 export function removeObserver(squareEl: Element) {
     squareObserver.removeObserver(squareEl)
 }
