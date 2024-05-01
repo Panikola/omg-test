@@ -5,7 +5,6 @@
       @mouseover="hover = true"
       @mouseleave="hover = false"
       ref="squareRef"
-      :data-square-id="props.squareId"
   >
     {{ number }}
   </div>
@@ -16,19 +15,17 @@ import {ref, onMounted, onUnmounted, watch, computed} from 'vue'
 import { store } from '../store'
 import {createVisibilityObserver, getRandomNumber} from '../utils'
 
-const props = withDefaults(defineProps<{
+const props = defineProps<{
   rowId: number,
   squareId: number
-}>(), {
-  rowId: 0,
-  squareId: 0
-})
+}>()
 
-const hover = computed(() => store.hoveredSquare === id)
 const id = `${props.rowId}_${props.squareId}`
 const number = ref(getRandomNumber(1, 1000))
-const squareRef = ref<null | HTMLElement>(null)
 const flash = ref(false)
+const squareRef = ref<null | HTMLElement>(null)
+
+const hover = computed(() => store.hoveredSquare === id)
 
 watch(() => store.randomNumberForSquare[id], (newNumber) => {
   number.value = newNumber
