@@ -12,10 +12,6 @@ export default function useSquareObserver() {
         });
     }
 
-    const squareNumber = (squareId: string): number => {
-        return store.randomNumberForSquare[squareId] || 0;
-    }
-
     const observer = new IntersectionObserver(updateVisibleSquaresList)
 
     const addObserver = (squareEl: Element) => {
@@ -24,6 +20,10 @@ export default function useSquareObserver() {
 
     const removeObserver = (squareEl: Element) => {
         observer.unobserve(squareEl)
+    }
+
+    const squareNumber = (squareId: string): number => {
+        return store.randomNumberForSquare[squareId] || 0;
     }
 
     return {

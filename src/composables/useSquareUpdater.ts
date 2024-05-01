@@ -51,7 +51,6 @@ export default function SquareUpdater() {
         }
     }
 
-
     return {
         initAnimation,
         cancelAnimation
