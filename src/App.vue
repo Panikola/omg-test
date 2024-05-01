@@ -4,18 +4,10 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, onUnmounted } from 'vue'
 import VerticalList from './components/VerticalList.vue'
 import useSquareUpdater from "./composables/useSquareUpdater.ts";
 
-const { initAnimation, cancelAnimation } = useSquareUpdater()
-onMounted(() => {
-  initAnimation()
-})
-
-onUnmounted(() => {
-  cancelAnimation()
-})
+useSquareUpdater()
 </script>
 
 <style scoped>

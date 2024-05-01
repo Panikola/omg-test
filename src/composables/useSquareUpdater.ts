@@ -1,5 +1,6 @@
 import { store } from "../store";
 import { getRandomNumber, getRowId } from "../utils";
+import { onMounted, onUnmounted } from "vue";
 
 export default function SquareUpdater() {
     let animationFrameId = 0
@@ -51,8 +52,11 @@ export default function SquareUpdater() {
         }
     }
 
-    return {
-        initAnimation,
-        cancelAnimation
-    }
+    onMounted(() => {
+        initAnimation()
+    })
+
+    onUnmounted(() => {
+        cancelAnimation()
+    })
 }
