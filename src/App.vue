@@ -1,12 +1,12 @@
 <template>
   <a class="repo-link" href="https://github.com/Panikola/omg-test">Github Repo: https://github.com/Panikola/omg-test</a>
-  <VerticalList />
+  <VerticalList/>
 </template>
 
-<script setup lang="ts">
-import {onMounted, onUnmounted} from 'vue'
+<script lang="ts" setup>
+import { onMounted, onUnmounted } from 'vue'
 import VerticalList from './components/VerticalList.vue'
-import { initAnimation, cancelAnimation } from './store'
+import { cancelAnimation, initAnimation } from './store'
 
 
 onMounted(() => {

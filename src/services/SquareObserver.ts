@@ -1,6 +1,6 @@
 export class SquareObserver {
     private observer: IntersectionObserver;
-
+ 
     constructor(callback: (entries: IntersectionObserverEntry[]) => void) {
         this.observer = new IntersectionObserver(callback)
     }

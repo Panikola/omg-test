@@ -1,17 +1,17 @@
 <template>
   <div
-      class="square"
-      :class="{ flash: flash }"
-      ref="squareRef"
       :id="props.squareId"
+      ref="squareRef"
+      :class="{ flash: flash }"
+      class="square"
   >
     {{ number }}
   </div>
 </template>
 
-<script setup lang="ts">
-import { ref, onMounted, onUnmounted, watch } from 'vue'
-import {addObserver, removeObserver, store} from '../store'
+<script lang="ts" setup>
+import { onMounted, onUnmounted, ref, watch } from 'vue'
+import { addObserver, removeObserver, store } from '../store'
 import { getRandomNumber } from '../utils'
 
 const props = defineProps<{
@@ -51,18 +51,27 @@ onUnmounted(() => {
   justify-content: center;
   transition: transform 0.3s ease;
 }
+
 .square:hover {
   transform: scale(0.8);
 }
+
 @media (prefers-color-scheme: light) {
   .square {
     border-color: var(--color-dark);
   }
 }
+
 @keyframes flash {
-  0% { background-color: transparent; }
-  50% { background-color: rgba(255, 255, 0, 0.5); }
-  100% { background-color: transparent; }
+  0% {
+    background-color: transparent;
+  }
+  50% {
+    background-color: rgba(255, 255, 0, 0.5);
+  }
+  100% {
+    background-color: transparent;
+  }
 }
 
 .flash {

@@ -1,12 +1,12 @@
 <template>
   <ul class="horizontal-list">
-    <li v-for="i in props.cols" :key="i" >
+    <li v-for="i in props.cols" :key="i">
       <Square :row-id="props.rowId" :square-id="`${props.rowId}_${i}`"/>
     </li>
   </ul>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import Square from './Square.vue'
 
 const props = defineProps<{
