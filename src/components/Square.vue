@@ -11,7 +11,7 @@
 
 <script lang="ts" setup>
 import { onMounted, onUnmounted, ref, watch } from 'vue'
-import { addObserver, removeObserver, store } from '../store'
+import { storeService } from '../store'
 import { getRandomNumber } from '../utils'
 
 const props = defineProps<{
@@ -22,7 +22,7 @@ const number = ref(getRandomNumber(1, 1000))
 const flash = ref(false)
 const squareRef = ref<null | HTMLElement>(null)
 
-watch(() => store.randomNumberForSquare[props.squareId], (newNumber) => {
+watch(() => storeService.squareNumber(props.squareId), (newNumber) => {
   number.value = newNumber
   flash.value = true
   setTimeout(() => flash.value = false, 300)
@@ -30,12 +30,12 @@ watch(() => store.randomNumberForSquare[props.squareId], (newNumber) => {
 
 onMounted(() => {
   if (squareRef.value) {
-    addObserver(squareRef.value)
+    storeService.addObserver(squareRef.value)
   }
 })
 onUnmounted(() => {
   if (squareRef.value) {
-    removeObserver(squareRef.value)
+    storeService.removeObserver(squareRef.value)
   }
 })
 </script>
