@@ -14,4 +14,12 @@ const randomRowsCount = getRandomNumber(100, 200)
 const randomColsCount = getRandomNumber(10, 30)
 </script>
 
-<style scoped></style>
+<style scoped>
+.vertical-list {
+  padding-left: 20px;
+}
+
+.vertical-list li {
+  padding-left: 15px;
+}
+</style>
