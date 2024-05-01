@@ -6,9 +6,9 @@
 <script lang="ts" setup>
 import { onMounted, onUnmounted } from 'vue'
 import VerticalList from './components/VerticalList.vue'
-import useStore from "./composables/useStore";
+import useSquareUpdater from "./composables/useSquareUpdater.ts";
 
-const { initAnimation, cancelAnimation } = useStore()
+const { initAnimation, cancelAnimation } = useSquareUpdater()
 onMounted(() => {
   initAnimation()
 })

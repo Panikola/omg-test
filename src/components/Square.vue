@@ -11,13 +11,15 @@
 
 <script lang="ts" setup>
 import { onMounted, onUnmounted, ref, watch } from 'vue'
-import useStore from '../composables/useStore'
 import { getRandomNumber } from '../utils'
+import useSquareObserver from "../composables/useSquareObserver.ts";
+import useStore from "../composables/useStore.ts";
 
 const props = defineProps<{
   squareId: string
 }>()
-const { squareNumber, addObserver, removeObserver } = useStore()
+const { addObserver, removeObserver } = useSquareObserver()
+const { squareNumber } = useStore()
 const number = ref(getRandomNumber(1, 1000))
 const flash = ref(false)
 const squareRef = ref<null | HTMLElement>(null)
