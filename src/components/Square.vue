@@ -2,8 +2,6 @@
   <div
       class="square"
       :class="{ flash: flash }"
-      @mouseover="hover = true"
-      @mouseleave="hover = false"
       ref="squareRef"
   >
     {{ number }}
@@ -11,9 +9,9 @@
 </template>
 
 <script setup lang="ts">
-import {ref, onMounted, onUnmounted, watch, computed} from 'vue'
+import { ref, onMounted, onUnmounted, watch } from 'vue'
 import { store } from '../store'
-import {createVisibilityObserver, getRandomNumber} from '../utils'
+import { createVisibilityObserver, getRandomNumber } from '../utils'
 
 const props = defineProps<{
   rowId: number,
@@ -24,8 +22,6 @@ const id = `${props.rowId}_${props.squareId}`
 const number = ref(getRandomNumber(1, 1000))
 const flash = ref(false)
 const squareRef = ref<null | HTMLElement>(null)
-
-const hover = computed(() => store.hoveredSquare === id)
 
 watch(() => store.randomNumberForSquare[id], (newNumber) => {
   number.value = newNumber
