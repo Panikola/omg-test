@@ -22,13 +22,8 @@ export default function useSquareObserver() {
         observer.unobserve(squareEl)
     }
 
-    const squareNumber = (squareId: string): number => {
-        return store.randomNumberForSquare[squareId] || 0;
-    }
-
     return {
         addObserver,
         removeObserver,
-        squareNumber
     }
 }
