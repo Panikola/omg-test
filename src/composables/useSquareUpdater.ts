@@ -8,7 +8,7 @@ export default function SquareUpdater() {
 
     const groupVisibleSquaresByRow = () => {
         const groupedSquares = {} as Record<string, string[]>;
-        store.visibleSquares.forEach((squareId: string) => {
+        Object.keys(store.visibleSquares).forEach((squareId: string) => {
             const rowId = getRowId(squareId);
             if (!groupedSquares[rowId]) {
                 groupedSquares[rowId] = [];
@@ -21,9 +21,8 @@ export default function SquareUpdater() {
     const updateRandomVisibleSquareInEachRow = (groupedSquares: Record<string, string[]>) => {
         Object.keys(groupedSquares).forEach(rowId => {
             const visibleSquaresInRow = groupedSquares[rowId];
-            const randomIndex = getRandomNumber(0, visibleSquaresInRow.length - 1);
+            const randomIndex = getRandomNumber(1, visibleSquaresInRow.length);
             const randomSquareId = visibleSquaresInRow[randomIndex];
-            store.randomVisibleSquareInEachRow[rowId] = visibleSquaresInRow[randomIndex];
             store.randomNumberForSquare[randomSquareId] = getRandomNumber(1, 1000);
         });
     }

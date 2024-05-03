@@ -1,26 +1,39 @@
 <template>
   <ul class="horizontal-list">
-    <li v-for="i in props.cols" :key="i">
-      <Square :row-id="props.rowId" :square-id="`${props.rowId}_${i}`"/>
+    <li
+        v-for="i in props.cols"
+        :id="`${props.rowId}_${i}`"
+        :key="i"
+        ref="squareRefs"
+        class="horizontal-list-item"
+    >
+      <Square :square-id="`${props.rowId}_${i}`"/>
     </li>
   </ul>
 </template>
 
 <script lang="ts" setup>
 import Square from './Square.vue'
+import { onMounted, onUnmounted, ref } from "vue";
+import useSquareObserver from "../composables/useSquareObserver.ts";
+
+const squareRefs = ref<null | HTMLElement[]>(null)
+const { addObserver, removeObserver } = useSquareObserver()
 
 const props = defineProps<{
   rowId: number,
   cols: number
 }>()
-
+onMounted(() => {
+  if (squareRefs.value) {
+    squareRefs.value.forEach(ref => addObserver(ref))
+  }
+})
+onUnmounted(() => {
+  if (squareRefs.value) {
+    squareRefs.value.forEach(ref => removeObserver(ref))
+  }
+})
 </script>
 
-<style scoped>
-.horizontal-list {
-  display: flex;
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-</style>
+<style></style>

@@ -10,16 +10,8 @@
 import HorizontalList from './HorizontalList.vue'
 import { getRandomNumber } from "../utils";
 
-const randomRowsCount = getRandomNumber(100, 200)
-const randomColsCount = getRandomNumber(10, 30)
+const randomRowsCount = getRandomNumber(500, 500)
+const randomColsCount = getRandomNumber(100, 100)
 </script>
 
-<style scoped>
-.vertical-list {
-  padding-left: 20px;
-}
-
-.vertical-list li {
-  padding-left: 15px;
-}
-</style>
+<style></style>

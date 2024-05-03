@@ -5,9 +5,9 @@ export default function useSquareObserver() {
         entries.forEach(entry => {
             const squareId = entry.target.id;
             if (entry.isIntersecting) {
-                store.visibleSquares.push(squareId || '');
+                store.visibleSquares[squareId] = true;
             } else {
-                store.visibleSquares = store.visibleSquares.filter((id: string) => id !== squareId);
+                delete store.visibleSquares[squareId];
             }
         });
     }
