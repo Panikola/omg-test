@@ -1,5 +1,5 @@
 import { store } from "../store";
-import { getRandomNumber, getRowId } from "../utils";
+import { getRandomNumber, getRowId, iterateObject } from "../utils";
 import { onMounted, onUnmounted } from "vue";
 
 export default function SquareUpdater() {
@@ -8,23 +8,25 @@ export default function SquareUpdater() {
 
     const groupVisibleSquaresByRow = () => {
         const groupedSquares = {} as Record<string, string[]>;
-        Object.keys(store.visibleSquares).forEach((squareId: string) => {
-            const rowId = getRowId(squareId);
+        const generator = iterateObject(store.visibleSquares)
+        for (let [key] of generator) {
+            const rowId = getRowId(key);
             if (!groupedSquares[rowId]) {
                 groupedSquares[rowId] = [];
             }
-            groupedSquares[rowId].push(squareId);
-        });
+            groupedSquares[rowId].push(key);
+        }
         return groupedSquares;
     }
 
     const updateRandomVisibleSquareInEachRow = (groupedSquares: Record<string, string[]>) => {
-        Object.keys(groupedSquares).forEach(rowId => {
-            const visibleSquaresInRow = groupedSquares[rowId];
+        const generator = iterateObject(groupedSquares)
+        for (let [key] of generator) {
+            const visibleSquaresInRow = groupedSquares[key];
             const randomIndex = getRandomNumber(1, visibleSquaresInRow.length);
             const randomSquareId = visibleSquaresInRow[randomIndex];
             store.randomNumberForSquare[randomSquareId] = getRandomNumber(1, 1000);
-        });
+        }
     }
 
     const updateRandomSquareInRows = () => {
