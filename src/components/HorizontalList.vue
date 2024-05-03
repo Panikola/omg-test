@@ -7,26 +7,43 @@
         ref="squareRefs"
         class="horizontal-list-item"
     >
-      <Square :square-id="`${props.rowId}_${i}`"/>
+      <div v-show="store.visibleSquares[`${props.rowId}_${i}`]" ref="numberRefs" class="square">
+        {{ numberForSquare(props.rowId, i) }}
+      </div>
     </li>
   </ul>
 </template>
 
 <script lang="ts" setup>
-import Square from './Square.vue'
-import { onMounted, onUnmounted, ref } from "vue";
+import { computed, onMounted, onUnmounted, ref } from "vue";
 import useSquareObserver from "../composables/useSquareObserver.ts";
-
-const squareRefs = ref<null | HTMLElement[]>(null)
-const { addObserver, removeObserver } = useSquareObserver()
+import { getRandomNumber, iterateArray } from "../utils";
+import { store } from "../store";
 
 const props = defineProps<{
   rowId: number,
   cols: number
 }>()
+
+const squareRefs = ref<null | HTMLElement[]>(null)
+const numberRefs = ref<null | HTMLElement[]>(null)
+const { addObserver, removeObserver } = useSquareObserver()
+const numberForSquare = computed(
+    () => (row: number, col: number) => store.squareNumbers[`${row}_${col}`]
+)
 onMounted(() => {
+  if (numberRefs.value) {
+    const generator = iterateArray(numberRefs.value)
+    for (let [_, entry] of generator) {
+      entry.innerText = getRandomNumber(1, 1000).toString()
+    }
+    numberRefs.value = null
+  }
   if (squareRefs.value) {
-    squareRefs.value.forEach(ref => addObserver(ref))
+    const generator = iterateArray(squareRefs.value)
+    for (let [_, entry] of generator) {
+      addObserver(entry)
+    }
   }
 })
 onUnmounted(() => {

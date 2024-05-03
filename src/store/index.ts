@@ -1,6 +1,6 @@
 import { reactive } from 'vue'
 
-export const store = reactive({
-    visibleSquares: <Record<string, boolean>>{},
-    randomNumberForSquare: <Record<string, number>>{},
-})
+export const store = {
+    visibleSquares: reactive<Record<string, boolean>>({}),
+    squareNumbers: reactive<Record<string, number>>({}),
+}

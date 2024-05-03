@@ -25,7 +25,7 @@ export default function SquareUpdater() {
             const visibleSquaresInRow = groupedSquares[key];
             const randomIndex = getRandomNumber(1, visibleSquaresInRow.length);
             const randomSquareId = visibleSquaresInRow[randomIndex];
-            store.randomNumberForSquare[randomSquareId] = getRandomNumber(1, 1000);
+            store.squareNumbers[randomSquareId] = getRandomNumber(1, 1000);
         }
     }
 
