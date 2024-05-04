@@ -1,7 +1,5 @@
 <template>
   <a class="repo-link" href="https://github.com/Panikola/omg-test">Github Repo: https://github.com/Panikola/omg-test</a>
-  <br>
-  <span>1000 rows 500 columns</span>
   <VerticalList/>
 </template>
 

@@ -1,4 +1,9 @@
 <template>
+  <div style="margin-top: 10px">
+    Rows: <span>{{ rows }}</span>
+    Columns: <span>{{ cols }}</span>
+  </div>
+
   <ul class="vertical-list">
     <li
         v-for="i in rows"
@@ -24,8 +29,8 @@ import { onMounted, ref } from "vue";
 import useObserver from "../composables/useObserver.ts";
 import { store } from "../store";
 
-const rows = getRandomNumber(1000, 1000)
-const cols = getRandomNumber(500, 500)
+const rows = getRandomNumber(500, 2000)
+const cols = getRandomNumber(30, 100)
 const { addObserver } = useObserver(store.visibleRows)
 
 const rowsRefs = ref<null | HTMLElement[]>(null)

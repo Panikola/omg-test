@@ -30,6 +30,11 @@ body {
     padding: 2rem;
 }
 
+.vertical-list {
+    margin: 0;
+    padding: 0;
+}
+
 .vertical-list-item {
     height: 53px;
     margin: 0;
